@@ -16,7 +16,11 @@
     static NSAppearance *dark;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        dark = [NSAppearance appearanceNamed:NSAppearanceNameVibrantDark];
+        if (@available(macOS 10.14, *)) {
+            dark = [NSAppearance appearanceNamed:NSAppearanceNameDarkAqua];
+        } else {
+            dark = [NSAppearance appearanceNamed:NSAppearanceNameVibrantDark];
+        }
     });
     return dark;
 }
